@@ -2,17 +2,12 @@ name: Auto Request Review
 
 on:
   pull_request:
-    types: [opened, synchronize] # プルリクが作成されたときや更新されたとき
+    types: [opened, synchronize]
 
 jobs:
   auto-request-review:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          ref: main # または 'master'、デフォルトブランチ名に合わせて変更
-
       - name: Request review from yamashita-kkkk
         uses: peter-evans/create-pull-request@v4
         with:

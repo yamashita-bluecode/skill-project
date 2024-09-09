@@ -2,7 +2,7 @@ name: Auto Request Review
 
 on:
   pull_request:
-    types: [opened, synchronize] # プルリクが作成されたときや更新されたとき
+    types: [opened, synchronize]
 
 jobs:
   auto-request-review:
@@ -10,11 +10,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          ref: main # または 'master'、デフォルトブランチ名に合わせて変更
 
       - name: Request review from yamashita-kkkk
-        uses: peter-evans/create-pull-request@v4
+        uses: actions/github-script@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          reviewers: yamashita-kkkk
+          script: |
+            const { owner, repo } = context.repo;
+            const pull_number = context.payload.pull_request.number;
+            await github.rest.pulls.requestReviewers({
+              owner,
+              repo,
+              pull_number,
+              reviewers: ['yamashita-kkkk']
+            });

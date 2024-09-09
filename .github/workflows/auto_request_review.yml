@@ -8,6 +8,9 @@ jobs:
   auto-request-review:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Request review from yamashita-kkkk
         uses: peter-evans/create-pull-request@v4
         with:

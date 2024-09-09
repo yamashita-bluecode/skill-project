@@ -1,5 +1,10 @@
 reviewers:
 
+  # Reviewers per author.
+  # Keys are reviewees, each of which has an array of reviewers.
+  per_author:
+    yamashita-kkkk:
+      - yamashita-bluecode
 files:
   # Keys are glob expressions.
   # You can assign groups defined above as well as GitHub usernames.
